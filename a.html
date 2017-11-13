@@ -4,16 +4,82 @@
 <title>给排水值周安排</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="shortcut icon" href="duty.png">
+<style>
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        font-size:24px;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        font-size:24px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+       -webkit-appearance: none;
+}
+input[type="number"]{
+       -moz-appearance: textfield;
+}
+</style>
+<script type="text/javascript">
+function keydown(e){
+    var key=window.event?e.keyCode:e.which;
+    if (key==13){
+    calwho();
+    }
+ }
+</script>
+<script type="text/javascript">
+function calwho(){
+var intime=document.getElementById("dateinput").value;
+var form=/^[0-9]{8}$/;
+if (!(form.test(intime))) {
+    var certnwho="";
+    document.getElementById("certnwho").innerHTML=certnwho;
+    return;
+  }
+intime=intime.slice(0,4)+"/"+intime.slice(4,6)+"/"+intime.slice(6);
+var intime=(new Date(intime)).getTime();
+var begintime=(new Date("2017/11/06")).getTime();
+var duration=intime-begintime;
+duration=Math.floor(duration/1000/3600/24/7);
+var week=duration%5;
+week=(week+5)%5;
+var certnwho;
+    switch (week){
+      case 0:
+        certnwho='薛婧秋';
+        break;
+      case 1:
+        certnwho='张建涛';
+        break;
+      case 2:
+        certnwho='贺酰淑';
+        break;
+      case 3:
+        certnwho='程  军';
+        break;
+      case 4:
+        certnwho='张一帆';
+        break;
+      default: 
+        certnwho="日期格式错误";
+        break;
+    }
+if (certnwho.length<=4){
+   certnwho="当日为: "+certnwho;
+}
+document.getElementById("certnwho").innerHTML=certnwho;
+}
+</script>
 </head>
 
-<body >
+<body>
 <div class="page" style="position:relative;margin:0px auto;width:980px;height:1560px;overflow:hidden;">
-<div style="position:absolute;left:50px;top:250px;"><p><font style="font-size:48px;">本周：</font></p></div>
+<div style="position:absolute;left:50px;top:250px;"><p><font style="font-size:48px;">本周:</font></p></div>
 <div id="who" style="position:absolute;left:346px;top:600px;z-index:1106;font-size:96px;"></div>
-<div style="position:absolute;left:50px;top:1250px;"><p><font style="font-size:48px;">下周：</font></p></div>
+<div style="position:absolute;left:50px;top:1250px;"><p><font style="font-size:48px;">下周:</font></p></div>
 <div id="nextwho" style="position:absolute;left:418px;top:1261px;z-index:1106;font-size:48px;"></div>
 
-<script language="javascript">
+<script type="text/javascript">
 function duty(){
 var d=new Date();
 var nowtime=d.getTime();
@@ -51,5 +117,12 @@ document.getElementById("who").innerHTML=who;
 }
 duty();
 </script>
+
+<div style="position:absolute;left:50px;top:1450px;font-size:36px;">
+<font>输入日期:</font>
+<input type="number" id="dateinput" autocomplete="off" pattern="[0-9]{8}" placeholder="八位数字如:20171106" style="font-size:36px;width:250px;" onkeydown="keydown(event)"/>
+<input type="submit" value="  查  看  " style="font-size:36px;" onclick="calwho()"/>
+ <font id="certnwho"></font>
+</div>
 
 </div></body></html>
