@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>给排水值周安排</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="shortcut icon" href="duty.png">
+</head>
+
+<body >
+<div class="page" style="position:relative;margin:0px auto;width:980px;height:1560px;overflow:hidden;">
+<div style="position:absolute;left:50px;top:250px;"><p><font style="font-size:48px;">本周：</font></p></div>
+<div id="who" style="position:absolute;left:346px;top:600px;z-index:1106;font-size:96px;"></div>
+<div style="position:absolute;left:50px;top:1250px;"><p><font style="font-size:48px;">下周：</font></p></div>
+<div id="nextwho" style="position:absolute;left:418px;top:1261px;z-index:1106;font-size:48px;"></div>
+
+<script language="javascript">
+function duty(){
+var d=new Date();
+var nowtime=d.getTime();
+var begintime=(new Date("2017/11/06")).getTime();
+var duration=nowtime-begintime;
+duration=Math.floor(duration/1000/3600/24/7);
+var week=duration%5;
+week=(week+5)%5;
+var who;
+var nextwho;
+    switch (week){
+      case 0:
+        who='薛婧秋';
+        nextwho='张建涛';
+        break;
+      case 1:
+        who='张建涛';
+        nextwho='贺酰淑';
+        break;
+      case 2:
+        who='贺酰淑';
+        nextwho='程  军';
+        break;
+      case 3:
+        who='程  军';
+        nextwho='张一帆';
+        break;
+      case 4:
+        who='张一帆';
+        nextwho='薛婧秋';
+        break;
+    }
+document.getElementById("nextwho").innerHTML=nextwho;
+document.getElementById("who").innerHTML=who;
+}
+duty();
+</script>
+
+</div></body></html>
