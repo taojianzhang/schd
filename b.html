@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--2017/11/20起生效-->
+<html>
+<head>
+<title>信息中心值日安排</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="shortcut icon" href="duty2.png">
+<style>
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        font-size:24px;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        font-size:24px;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+       -webkit-appearance: none;
+}
+input[type="number"]{
+       -moz-appearance: textfield;
+}
+</style>
+<script type="text/javascript">
+function keydown(e){
+    var key=window.event?e.keyCode:e.which;
+    if (key==13){
+    calwho();
+    }
+ }
+</script>
+<script type="text/javascript">
+function calwho(){
+var intime=document.getElementById("dateinput").value;
+var form=/^[0-9]{8}$/;
+if (!(form.test(intime))) {
+    var certnwho="";
+    document.getElementById("certnwho").innerHTML=certnwho;
+    return;
+  }
+intime=intime.slice(0,4)+"/"+intime.slice(4,6)+"/"+intime.slice(6);
+var intime=(new Date(intime)).getTime();
+var begintime=(new Date("2017/11/20")).getTime();
+var duration=intime-begintime;
+duration=Math.floor(duration/1000/3600/24/7);
+var week=duration%7;
+week=(week+7)%7;
+var certnwho;
+    switch (week){
+      case 0:
+        certnwho='张择南  李玉婷';
+        break;
+      case 1:
+        certnwho='高伟   柴前';
+        break;
+      case 2:
+        certnwho='徐梦龙  田景';
+        break;
+      case 3:
+        certnwho='余蔓辰  焦琦';
+        break;
+      case 4:
+        certnwho='贾沁林  常龙艳';
+        break;
+      case 5:
+        certnwho='张建涛  贺酰淑';
+        break;
+      case 6:
+        certnwho='程军  张一帆';
+        break;
+      default: 
+        certnwho="日期格式错误";
+        break;
+    }
+if (certnwho.length>6){
+   certnwho="当日为: 　"+certnwho;
+}
+document.getElementById("certnwho").innerHTML=certnwho;
+}
+</script>
+</head>
+
+<body>
+<div class="page" style="position:relative;margin:0px auto;width:980px;height:1560px;overflow:hidden;">
+<div style="position:absolute;left:50px;top:150px;"><p><font style="font-size:48px;">本周:</font></p></div>
+<div id="who" style="position:absolute;left:340px;top:500px;z-index:1106;font-size:96px;"></div>
+<div style="position:absolute;left:50px;top:1150px;"><p><font style="font-size:48px;">下周:</font></p></div>
+<div id="nextwho" style="position:absolute;left:331px;top:1167px;z-index:1106;font-size:48px;"></div>
+
+<script type="text/javascript">
+function duty(){
+var d=new Date();
+var nowtime=d.getTime();
+var begintime=(new Date("2017/11/20")).getTime();
+var duration=nowtime-begintime;
+duration=Math.floor(duration/1000/3600/24/7);
+var week=duration%7;
+week=(week+7)%7;
+var who;
+var nextwho;
+    switch (week){
+      case 0:
+        who='张择南<br/>李玉婷';
+        nextwho='高　伟  柴　前';
+        break;
+      case 1:
+        who='高　伟<br/>柴　前';
+        nextwho='徐梦龙  田　景';
+        break;
+      case 2:
+        who='徐梦龙<br/>田　景';
+        nextwho='余蔓辰  焦　琦';
+        break;
+      case 3:
+        who='余蔓辰<br/>焦　琦';
+        nextwho='贾沁林  常龙艳';
+        break;
+      case 4:
+        who='贾沁林<br/>常龙艳';
+        nextwho='张建涛  贺酰淑';
+        break;     
+      case 5:
+        who='张建涛<br/>贺酰淑';
+        nextwho='程　军  张一帆';
+        break;
+      case 6:
+        who='程　军<br/>张一帆';
+        nextwho='张择南  李玉婷';
+        break;
+
+    }
+if (duration==-1) {
+who="从下周<br/>&nbsp;生效";
+}
+document.getElementById("nextwho").innerHTML=nextwho;
+document.getElementById("who").innerHTML=who;
+}
+duty();
+</script>
+
+<div style="position:absolute;left:50px;top:1350px;font-size:36px;">
+<font>输入日期:</font>
+<input type="number" id="dateinput" autocomplete="off" pattern="[0-9]{8}" placeholder="八位数字如:20171106" style="font-size:36px;width:250px;" onkeydown="keydown(event)"/>
+<input type="submit" value="  查  看  " style="font-size:36px;" onclick="calwho()"/>
+<div style="margin-top:15px"><font id="certnwho"></font></div>
+</div>
+
+</div></body></html>
